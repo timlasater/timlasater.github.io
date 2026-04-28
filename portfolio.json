@@ -32,8 +32,9 @@
           "model3d": "assets/nasal-model.glb",
           "images": [
             { "url": "assets/nasal-sw.jpg", "caption": "SolidWorks CAD" },
-            { "url": "assets/nasal-assembled.jpg", "caption": "Physical Print" },
-            { "url": "assets/nasal-separated.jpg", "caption": "Internal View" }
+            { "url": "assets/nasal-assembled.jpg", "caption": "Physical Print (Assembled)" },
+            { "url": "assets/nasal-open.jpg", "caption": "Internal View" },
+            { "url": "assets/nasal-separated.jpg", "caption": "Components" }
           ],
           "contactOnly": true
         },
