@@ -27,7 +27,7 @@
           "title": "Nasal Passages Model for Drug Delivery Testing",
           "shortTitle": "Nasal Passages Model",
           "company": "Scientific Horizons Consulting",
-          "description": "A model of the nasal passages, not including the sinuses, designed to evaluate aerosol delivery efficiency to target areas, particularly the middle meatus and olfactory region. Constructed from CT data and printed with a clear resin to allow for visualization of aerosol flow patterns using a water-reactive dye. This model was used in benchtop testing to validate nebulizer designs against commercial competitors.",
+          "description": "A model of the nasal passages, not including the sinuses, designed to evaluate aerosol delivery efficiency to target areas, particularly the middle meatus and olfactory region. Constructed from CT data and printed with white filament to allow for visualization of aerosol flow patterns using a water-reactive dye. Small internal magnets allow easy assembly and disassembly. This model is used in benchtop testing to validate nebulizer designs against commercial competitors.",
           "type": "assembly",
           "model3d": "assets/nasal-model.glb",
           "images": [
