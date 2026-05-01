@@ -78,8 +78,8 @@
         },
         {
           "id": "flow-simulation",
-          "title": "SOLIDWORKS Flow Simulation of Microfluidic Channel Geometries",
-          "shortTitle": "Flow Simulation of Microfluidic Channels",
+          "title": "SOLIDWORKS Computational Fluid Dynamics Simulation of Microfluidic Channel Geometries",
+          "shortTitle": "CFD of Microfluidic Channels",
           "company": "Hui Lab",
           "description": "Simulated and optimized microfluidic flow and mixing using SOLIDWORKS Flow Simulation, based on the design put forward by Stott <i>et al.</i> (2010) in \"Isolation of circulating tumor cells using a microvortex-generating herringbone-chip.\" (<a href='https://www.pnas.org/doi/10.1073/pnas.1012539107' target='_blank' class='company-link' style='font-weight: normal;'>PNAS<a>). This project involved creating CAD models of various microfluidic channel geometries, running flow simulations to evaluate mixing efficiency, and iterating on the designs to improve performance. The optimized designs were then fabricated and tested in the lab, resulting in improved mixing performance by over 33%.",
           "type": "part",
