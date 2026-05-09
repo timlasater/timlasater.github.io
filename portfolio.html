@@ -141,6 +141,15 @@
                                     </div>`;
                                 thumbnailsHTML += `<button class="thumbnail ${isActive}" data-index="${slideIndex}" title="${altText}">🧊</button>`;
                                 
+                            } else if (media.type === 'document') {
+                                // --- NEW: Handle PDFs and Google Slides ---
+                                mediaHTML += `
+                                    <div class="p-slide">
+                                        <iframe src="${media.url}" class="portfolio-document" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+                                        ${captionHTML}
+                                    </div>`;
+                                thumbnailsHTML += `<button class="thumbnail ${isActive}" data-index="${slideIndex}" title="${altText}">📄</button>`;
+                            
                             } else {
                                 mediaHTML += `
                                     <div class="p-slide">
@@ -156,6 +165,11 @@
                         
                         thumbnailsHTML += `</div>`; // Close the thumbnail container
 
+                        // --- NEW: Count slides and conditionally hide carousel UI ---
+                        const totalSlides = (project.model3d && project.model3d !== "" ? 1 : 0) + project.images.length;
+                        const navButtonsHTML = totalSlides > 1 ? `<button class="p-prev-btn">&#10094;</button><button class="p-next-btn">&#10095;</button>` : '';
+                        const finalThumbnailsHTML = totalSlides > 1 ? thumbnailsHTML : '';
+
                         // Company tag is optional
                         const companyHTML = project.company ? `<p class="company-tag">${project.company}</p>` : '';
 
@@ -169,15 +183,15 @@
                                 <div class="portfolio-carousel-container">
                                     <button class="expand-btn">Expand ⤢</button>
                                     <button class="close-btn">Close ✖</button>
-                                    <button class="p-prev-btn">&#10094;</button>
-                                    <button class="p-next-btn">&#10095;</button>
+                                    
+                                    ${navButtonsHTML}
                                     
                                     <div class="p-carousel-track">
                                         ${modelHTML}
                                         ${mediaHTML}
                                     </div>
-
-                                    ${thumbnailsHTML}
+                                    
+                                    ${finalThumbnailsHTML}
                                 </div>
 
                                 <div class="download-links">
@@ -251,17 +265,22 @@
                     });
                 });
 
-                nextBtn.addEventListener('click', () => {
-                    if (currentIndex < slides.length - 1) currentIndex++;
-                    else currentIndex = 0;
-                    updateSlidePosition();
-                });
+                // Only attach click events if the buttons exist
+                if (nextBtn) {
+                    nextBtn.addEventListener('click', () => {
+                        if (currentIndex < slides.length - 1) currentIndex++;
+                        else currentIndex = 0;
+                        updateSlidePosition();
+                    });
+                }
 
-                prevBtn.addEventListener('click', () => {
-                    if (currentIndex > 0) currentIndex--;
-                    else currentIndex = slides.length - 1;
-                    updateSlidePosition();
-                });
+                if (prevBtn) {
+                    prevBtn.addEventListener('click', () => {
+                        if (currentIndex > 0) currentIndex--;
+                        else currentIndex = slides.length - 1;
+                        updateSlidePosition();
+                    });
+                }
 
                 expandBtn.addEventListener('click', () => {
                     container.classList.add('expanded');
@@ -357,9 +376,11 @@
             if (!activeContainer) return;
 
             if (e.key === 'ArrowRight') {
-                activeContainer.querySelector('.p-next-btn').click();
+                const nextBtn = activeContainer.querySelector('.p-next-btn');
+                if (nextBtn) nextBtn.click();
             } else if (e.key === 'ArrowLeft') {
-                activeContainer.querySelector('.p-prev-btn').click();
+                const prevBtn = activeContainer.querySelector('.p-prev-btn');
+                if (prevBtn) prevBtn.click();
             } else if (e.key === 'Escape') {
                 activeContainer.querySelector('.close-btn').click();
             }

@@ -93,6 +93,21 @@
             "cad": "assets/downloads/microfluidic-chevrons.SLDPRT",
             "stl": "assets/downloads/microfluidic-chevrons.STL"
           }
+        },
+        {
+          "id": "promptly",
+          "title": "PROMPTly: Integrated Diagnostic Pad for Premature Rupture of Membranes",
+          "shortTitle": "PROMPTly Diagnostic Pad",
+          "company": "PROMPTly Senior Design Project",
+          "description": "PROMPTly (Premature Rupture of Membrane Pad for Testing) is a novel medical diagnostic device designed to eliminate the anxiety and high costs of identifying Premature Rupture of Membranes (PROM), a complication affecting approximately 10% of pregnancies. Because 'look and smell' shouldn't be the standard of care for a high-risk pregnancy, this project integrates a lateral flow immunoassay directly into a standard sanitary pad to provide a non-invasive, passive monitoring solution for expectant mothers. By leveraging the highly specific biomarker Placental Alpha-Microglobulin-1 (PAMG-1) and a proprietary microfluidic routing system, PROMPTly offers clinical-grade accuracy that outperforms unreliable pH-based at-home tests. Ultimately, this device seeks to bridge the gap between expensive clinical interventions and crude home remedies, empowering patients to make informed healthcare decisions while significantly reducing the burden of unnecessary and costly emergency room visits.",
+          "type": "assembly",
+          "contactOnly": true,
+          "images": [
+            { 
+              "url": "https://docs.google.com/presentation/d/e/2PACX-1vTxbXxUx1c5RQCcVYONz5D9T-tCWw9idbZEygFaLoPM9FYTDomZ6NXUHyXm6ID34JbCPtvJV5ebXUxs/pubembed?start=false&loop=false&delayms=3000", 
+              "type": "document" 
+            }
+          ]
         }
       ]
     },
