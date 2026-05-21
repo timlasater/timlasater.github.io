@@ -7,11 +7,12 @@
       "logo": "assets/scientific_horizons_consulting_logo.jpg",
       "date": "October 2024 - Present",
       "bullets": [
-        "Lead design and prototyping of portable nebulizer devices with novel actuation and drug delivery mechanisms in SolidWorks; led development of <strong>>25</strong> device iterations",
+        "Lead design and prototyping of portable nebulizer devices with novel actuation and drug delivery mechanisms in SolidWorks, leading development of <strong>>25</strong> device iterations to optimize delivery",
+	      "Lead <strong>Design of Experiments (DOE)</strong> for device evaluation; analyze results in <strong>Python, JMP, & Excel</strong>",
         "Design and construct models of the nasal passages and sinuses from CT data to evaluate aerosol delivery efficiency to target areas",
-        "Construct benchtop circuits & apparatus to validate nebulizer designs against commercial competitors, measuring pulsatile airflow frequency, flow rate, & pressure amplitude",
-        "Conduct benchtop testing to evaluate aerosolization efficiency, dissolution, and permeation using custom-designed, 3D printed simulated oral environment, informing design improvements",
-        "Developed a novel experimental protocol integrating dissolution and permeation assays to simulate simultaneous oral drug delivery dynamics, which was adopted company-wide",
+        "Construct benchtop circuits & test fixtures to validate nebulizer designs against commercial competitors, measuring airflow pressure amplitude & targeted aerosol delivery efficiency",
+	      "Write Standard Operating Procedures (<strong>SOP</strong>) for novel & improved experimental protocols",
+        "Conduct benchtop testing to evaluate oral drug dissolution and trans-buccal permeation using custom-designed, 3D printed simulated oral environment, informing formulation improvements",
         "Instructed colleagues in execution of <strong>>5</strong> novel experimental protocols"
       ],
       "projects": [
