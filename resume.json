@@ -26,14 +26,14 @@
       "company": "PROMPTly: Integrated Diagnostic Pad for Amniotic Fluid Detection",
       "link": "https://www.linkedin.com/company/promptly-medtech/",
       "logo": "assets/promptly_logo.jpg",
-      "date": "February 2025 - Present",
+      "date": "February 2025 - June 2026",
       "bullets": [
-        "Leading design of an at-home diagnostic pad integrating a lateral flow immunoassay (LFT) for detecting biomarkers of Premature Rupture of Membranes (PROM) in amniotic fluid",
-        "Develop and test fluid-routing and volume-control mechanisms to achieve controlled flow",
-        "Optimize material and flow paths with synthetic fluid analogs to validate sensitivity & specificity",
+        "Led design of an at-home diagnostic pad integrating a lateral flow immunoassay (LFT) for detecting biomarkers of Premature Rupture of Membranes (PROM) in amniotic fluid",
+        "Developed and tested fluid-routing and volume-control mechanisms to achieve controlled flow",
+        "Optimized material and flow paths with synthetic fluid analogs to validate sensitivity & specificity",
         "Evaluated material biocompatibility according to <strong>ISO 10993</strong>",
-        "Direct development, prototyping, & market analysis, considering user needs and manufacturing",
-        "Define business plan, go-to-market strategy, regulatory considerations, and IP pathway"
+        "Directed development, prototyping, & market analysis, considering user needs and manufacturing",
+        "Defined business plan, go-to-market strategy, regulatory considerations, and IP pathway"
       ],
       "projects": [
         { "name": "Pitch Deck", "link": "portfolio.html#promptly" }
@@ -44,7 +44,7 @@
       "company": "Hui Lab, University of California, Irvine",
       "link": "https://hui.bme.uci.edu/",
       "logo": "assets/hui-logo.png",
-      "date": "June 2024 - Present",
+      "date": "June 2024 - June 2026",
       "bullets": [
         "Designed and constructed an automated droplet pump for combinatorial drug screening with computer vision tracking, reducing experimental duration and error rate by up to <strong>70%</strong>",
         "Secured <strong>$1,500</strong> in funding and presented at the UCI Undergraduate Research Symposium",
