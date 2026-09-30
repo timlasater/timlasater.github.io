@@ -31,7 +31,8 @@
     <nav>
             <a href="index.html">Home</a> | 
             <a href="portfolio.html">Portfolio</a> | 
-            <a href="resume.html">Resume</a> 
+            <a href="resume.html">Resume</a> |
+            <a href="/graph-builder/">Graph Builder</a>
    </nav>
 
     <div class="portfolio-container">
@@ -100,6 +101,10 @@
                                 `;
                             }
                         }
+
+                        const websiteHTML = project.website
+                            ? `<a href="${project.website}" class="btn-download">Try Graph Builder</a>`
+                            : '';
 
                         // --- New Variable for Thumbnails ---
                         let thumbnailsHTML = `<div class="carousel-thumbnails">`;
@@ -195,6 +200,7 @@
                                 </div>
 
                                 <div class="download-links">
+                                    ${websiteHTML}
                                     ${downloadsHTML}
                                 </div>
                             </section>
@@ -211,6 +217,10 @@
 
                 // 3. Initialize the interactive carousels AFTER elements are on the page
                 initializeCarousels();
+
+                // Project cards are added after the page loads, so direct links need a second scroll.
+                const linkedProject = document.getElementById(location.hash.slice(1));
+                if (linkedProject) linkedProject.scrollIntoView();
             })
             .catch(error => {
                 console.error("Error loading portfolio data:", error);

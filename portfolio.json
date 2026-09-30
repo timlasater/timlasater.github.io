@@ -5,6 +5,18 @@
       "sectionTitle": "Professional Projects",
       "projects": [
         {
+          "id": "graph-builder",
+          "title": "Graph Builder: Scientific Graphing App",
+          "shortTitle": "Graph Builder",
+          "company": "Independent Software Project",
+          "description": "I built Graph Builder to make scientific data exploration more direct. Import CSV or Excel files, drag columns onto graph roles, combine plot layers, add fitted trends and statistical summaries, and export graphs as PNG or SVG. Visitors can try the built-in example without importing a file, and imported data stays in their browser.",
+          "type": "software",
+          "images": [
+            { "url": "assets/graph-builder-workspace.png", "caption": "Graph Builder with the built-in example data" }
+          ],
+          "website": "/graph-builder/app/"
+        },
+        {
           "id": "sinus-model",
           "title": "Nasal Sinus Model for Drug Delivery Testing",
           "shortTitle": "Nasal Sinus Model",

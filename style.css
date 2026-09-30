@@ -109,6 +109,19 @@ nav a:hover, .toc-list a:hover {
     background: var(--bg-color); /* Adds a subtle highlight behind the link on hover */
 }
 
+@media (max-width: 600px) {
+    nav {
+        padding: 0.65rem 0.25rem;
+        white-space: nowrap;
+    }
+
+    nav a {
+        margin: 0;
+        padding: 5px 4px;
+        font-size: 0.82rem;
+    }
+}
+
 #education, #experience, #skills {
     max-width: 800px;
     margin: 0rem auto;
@@ -316,6 +329,7 @@ footer {
     margin-bottom: 2rem;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    scroll-margin-top: 80px;
 }
 
 .company-tag {
