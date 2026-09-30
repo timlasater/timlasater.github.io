@@ -753,6 +753,14 @@ model-viewer {
     gap: 1.2rem; 
 }
 
+.role-followup {
+    margin-top: 1.25rem;
+}
+
+.role-followup p {
+    margin: 0 0 1rem;
+}
+
 /* Styling for the SHC Logo in the banner */
 .banner-logo {
     width: 55px;
