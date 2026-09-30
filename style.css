@@ -1043,14 +1043,6 @@ header p {
     font-size: 0.88rem;
 }
 
-.floating-resume-btn {
-    display: inline-block;
-    font-size: 0.82rem;
-    margin-top: 0.55rem;
-    padding: 0.55rem 1rem;
-    position: static;
-}
-
 nav {
     align-items: center;
     display: flex;
