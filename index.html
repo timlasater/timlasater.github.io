@@ -13,7 +13,6 @@
     <meta property="og:type" content="website">
     <link rel="stylesheet" href="style.css">
     <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
-    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
 </head>
 <body>
     <header>
@@ -27,18 +26,24 @@
         <a href="assets/Timothy_Lasater_Resume.pdf" class="floating-resume-btn" download>Download Resume</a>
     </header>
     
-    <nav>
-            <a href="index.html">Home</a> | 
-            <a href="portfolio.html">Portfolio</a> | 
-            <a href="resume.html">Resume</a> |
+   <nav aria-label="Main navigation">
+            <a href="index.html" aria-current="page">Home</a>
+            <a href="portfolio.html">Portfolio</a>
+            <a href="resume.html">Resume</a>
             <a href="/graph-builder/">Graph Builder</a>
    </nav>
    
-   <section class="parallax-hero">
-        <div class="hero-tagline">
-            Building the tools that<br>
-            <span class="highlight">make people feel better.</span>
+   <section class="home-hero" aria-labelledby="hero-title">
+        <div class="home-hero-copy">
+            <p class="eyebrow">Biomedical engineering · Medical device R&D</p>
+            <h2 id="hero-title">Designing and testing medical devices for better drug delivery.</h2>
+            <p>I turn CT data, fluid dynamics, and benchtop experiments into practical tools for medical device research.</p>
+            <a href="#featured-work" class="btn-download">See selected work</a>
         </div>
+        <figure class="home-hero-image">
+            <img src="assets/sinus-closeup.jpg" alt="Physical nasal sinus model used for aerosol deposition testing">
+            <figcaption>Nasal sinus model for drug delivery testing</figcaption>
+        </figure>
     </section>
 
     <section id="about-me" class="content-section">
@@ -67,54 +72,50 @@
     </section>
 
     <section id="featured-work" class="content-section">
-        <h2 class="text-center">Featured Projects</h2>
-        <div class="carousel-container">
-            <button class="carousel-btn prev-btn">&#10094;</button>
-            <div class="carousel-track">
-                <div class="carousel-slide">
-                    <a href="portfolio.html#graph-builder" class="slide-link">
-                        <img src="assets/graph-builder-workspace.png" alt="Graph Builder showing an example scientific graph">
-                        <div class="slide-caption">Graph Builder: Scientific Graphing App</div>
-                    </a>
-                </div>
-
-                <div class="carousel-slide">
-                    <a href="portfolio.html#sinus-model" class="slide-link">
-                        <img src="assets/sinus-assem.png" alt="Nasal Sinus Model">
-                        <div class="slide-caption">Nasal Sinus Model for Drug Delivery Testing</div>
-                    </a>
-                </div>
-
-                <div class="carousel-slide">
-                    <a href="portfolio.html#flow-simulation" class="slide-link">
-                        <img src="assets/microvortex-screenshot.png" alt="CFD of Microfluidic Channels">
-                        <div class="slide-caption">CFD of Microfluidic Channels</div>
-                    </a>
-                </div>
-
-                <div class="carousel-slide">
-                    <a href="portfolio.html#dissolution-cell" class="slide-link">
-                        <img src="assets/DP-section-right.png" alt="Dissolution + Permeation Cell">
-                        <div class="slide-caption">Simultaneous Dissolution + Permeation Cell</div>
-                    </a>
-                </div>
-                
-                <div class="carousel-slide">
-                    <a href="portfolio.html#droplet-pump" class="slide-link">
-                        <img src="assets/cameraFixtureSW.png" alt="Computer Vision Camera Fixture">
-                        <div class="slide-caption">Camera Fixture for Computer Vision-Controlled Droplet Pump</div>
-                    </a>
-                </div>
-                
-                <div class="carousel-slide">
-                    <a href="portfolio.html#duck" class="slide-link">
-                        <img src="assets/duckSW1.png" alt="Toy Duck Assembly">
-                        <div class="slide-caption">Toy Duck Assembly</div>
-                    </a>
-                </div>
-                
+        <div class="section-heading">
+            <div>
+                <p class="eyebrow">Selected work</p>
+                <h2>Featured Projects</h2>
             </div>
-            <button class="carousel-btn next-btn">&#10095;</button>
+            <a href="portfolio.html" class="text-link">View all projects <span aria-hidden="true">→</span></a>
+        </div>
+        <div class="featured-grid">
+            <a class="featured-card featured-card-primary" href="portfolio.html#sinus-model">
+                <img src="assets/sinus-closeup.jpg" alt="Physical nasal sinus model">
+                <div class="featured-card-copy">
+                    <span class="project-type">Medical device testing</span>
+                    <h3>Nasal Sinus Model</h3>
+                    <p>Measuring where aerosols deposit in individual sinuses.</p>
+                    <span class="card-link">See project <span aria-hidden="true">→</span></span>
+                </div>
+            </a>
+            <a class="featured-card" href="portfolio.html#flow-simulation">
+                <img src="assets/microvortex-screenshot.png" alt="Microfluidic flow simulation">
+                <div class="featured-card-copy">
+                    <span class="project-type">Microfluidics</span>
+                    <h3>Flow Simulation</h3>
+                    <p>Channel design that improved lab mixing performance by over 33%.</p>
+                    <span class="card-link">See project <span aria-hidden="true">→</span></span>
+                </div>
+            </a>
+            <a class="featured-card" href="portfolio.html#dissolution-cell">
+                <img src="assets/DP_isometric.png" alt="CAD model of a dissolution and permeation cell">
+                <div class="featured-card-copy">
+                    <span class="project-type">Drug delivery research</span>
+                    <h3>Dissolution + Permeation Cell</h3>
+                    <p>One apparatus for studying two drug-delivery processes.</p>
+                    <span class="card-link">See project <span aria-hidden="true">→</span></span>
+                </div>
+            </a>
+            <a class="featured-card" href="portfolio.html#graph-builder">
+                <img src="assets/graph-builder-workspace.png" alt="Graph Builder showing an example scientific graph">
+                <div class="featured-card-copy">
+                    <span class="project-type">Scientific software</span>
+                    <h3>Graph Builder</h3>
+                    <p>A browser tool for exploring and presenting scientific data.</p>
+                    <span class="card-link">See project <span aria-hidden="true">→</span></span>
+                </div>
+            </a>
         </div>
     </section>
 
@@ -139,62 +140,5 @@
         <p>© 2026 Timothy Lasater | Built with GitHub Pages</p>
     </footer>
 
-<script>
-        const track = document.querySelector('.carousel-track');
-        const slides = Array.from(track.children);
-        const nextButton = document.querySelector('.next-btn');
-        const prevButton = document.querySelector('.prev-btn');
-        let currentIndex = 0;
-        let autoAdvanceTimer; // Variable to hold the timer
-
-        // Function to move the carousel
-        function updateCarousel(index) {
-            const slideWidth = slides[0].getBoundingClientRect().width;
-            track.style.transform = 'translateX(-' + (slideWidth * index) + 'px)';
-        }
-
-        // Function to start the 4-second auto-advance loop
-        function startAutoAdvance() {
-            autoAdvanceTimer = setInterval(() => {
-                nextButton.click(); 
-            }, 4000); 
-        }
-
-        // Function to reset the timer if the user manually clicks
-        function resetAutoAdvance() {
-            clearInterval(autoAdvanceTimer);
-            startAutoAdvance();
-        }
-
-        // Next Button Click Logic
-        nextButton.addEventListener('click', () => {
-            if (currentIndex < slides.length - 1) {
-                currentIndex++;
-            } else {
-                currentIndex = 0; // Loop back to the first slide
-            }
-            updateCarousel(currentIndex);
-            resetAutoAdvance(); // Reset timer on manual interaction
-        });
-
-        // Previous Button Click Logic
-        prevButton.addEventListener('click', () => {
-            if (currentIndex > 0) {
-                currentIndex--;
-            } else {
-                currentIndex = slides.length - 1; // Loop to the last slide
-            }
-            updateCarousel(currentIndex);
-            resetAutoAdvance(); // Reset timer on manual interaction
-        });
-
-        // Keep carousel aligned if the user resizes their browser window
-        window.addEventListener('resize', () => {
-            updateCarousel(currentIndex);
-        });
-
-        // Start the automatic sliding when the page loads
-        startAutoAdvance();
-    </script>
 </body>
 </html>
