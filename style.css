@@ -635,6 +635,46 @@ model-viewer {
     background: transparent;
 }
 
+.p-slide.has-model model-viewer {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.p-slide.has-model.model-ready model-viewer {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.p-slide .model-preview {
+    position: absolute;
+    inset: 20px;
+    width: calc(100% - 40px);
+    height: calc(100% - 40px);
+    max-height: none;
+    object-fit: contain;
+    z-index: 1;
+}
+
+.load-model-btn {
+    position: absolute;
+    z-index: 2;
+    padding: 0.7rem 1rem;
+    border: 0;
+    border-radius: 6px;
+    color: #fff;
+    background: var(--accent-color);
+    cursor: pointer;
+}
+
+.load-model-btn:disabled {
+    cursor: wait;
+}
+
+.p-slide.model-ready .model-preview,
+.p-slide.model-ready .load-model-btn {
+    display: none;
+}
+
 /* Labels on the slides */
 .slide-label {
     position: absolute;
@@ -1375,6 +1415,11 @@ a:focus-visible, button:focus-visible, summary:focus-visible {
 }
 
 @media (max-width: 680px) {
+    #education, #experience, #skills {
+        box-sizing: border-box;
+        padding-inline: 1rem;
+    }
+
     nav a {
         font-size: 0.86rem;
         padding: 0.4rem 0.45rem;

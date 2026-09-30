@@ -111,7 +111,7 @@
             { "url": "assets/camera-diagram.png" },
             { "url": "assets/camera-setup.png" },
             { "url": "assets/cameraFixtureSW.png", "caption": "SolidWorks Assembly" },
-            { "url": "assets/camera-video.mp4", "caption": "CV Demo", "type":"video" }
+            { "url": "assets/camera-video.mp4", "caption": "CV Demo", "type":"video", "poster": "assets/camera-setup.png" }
           ],
           "downloads": {
             "cad": "assets/downloads/cameraFixtureSW.zip",
@@ -136,7 +136,7 @@
           "description": "Simulated and optimized microfluidic flow and mixing using SOLIDWORKS Flow Simulation, based on the design put forward by Stott <i>et al.</i> (2010) in \"Isolation of circulating tumor cells using a microvortex-generating herringbone-chip.\" (<a href='https://www.pnas.org/doi/10.1073/pnas.1012539107' target='_blank' rel='noopener noreferrer' class='company-link' style='font-weight: normal;'>PNAS</a>). This project involved creating CAD models of various microfluidic channel geometries, running flow simulations to evaluate mixing efficiency, and iterating on the designs to improve performance. The optimized designs were then fabricated and tested in the lab, resulting in improved mixing performance by over 33%.",
           "type": "part",
           "images": [
-            { "url": "assets/microvortex.mp4", "caption": "Microvortices Animation", "type": "video" },
+            { "url": "assets/microvortex.mp4", "caption": "Microvortices Animation", "type": "video", "poster": "assets/microvortex-screenshot.png" },
             { "url": "assets/micro-vortices.png", "caption": "Microvorticies from above" },
             { "url": "assets/micro-chevrons.png", "caption": "Mixing demonstrated over the channel length" },
             { "url": "assets/microfluidics-chevrons.glb", "caption": "Chip Design", "type":"3d" }
@@ -218,8 +218,8 @@
           "images": [
             { "url": "assets/duckSW1.png", "caption": "SolidWorks CAD" },
             { "url": "assets/duck-boomerang.gif", "caption": "Motion Study" },
-            { "url": "assets/duck-flap.mp4", "caption": "The wings can flap!", "type": "video" },
-            { "url": "assets/duck-waddle.mp4", "caption": "The feet can waddle, but it can still sit upright.", "type": "video" },
+            { "url": "assets/duck-flap.mp4", "caption": "The wings can flap!", "type": "video", "poster": "assets/duckSW1.png" },
+            { "url": "assets/duck-waddle.mp4", "caption": "The feet can waddle, but it can still sit upright.", "type": "video", "poster": "assets/duck-sitting.jpg" },
             { "url": "assets/duck-sitting.jpg"},
             { "url": "assets/duckSW3.png", "caption": "Transparent view of the internal mechanism" },
             { "url": "assets/duckSW2.png"}

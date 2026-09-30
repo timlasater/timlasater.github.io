@@ -13,7 +13,6 @@
     <meta property="og:type" content="website">
     <link rel="stylesheet" href="style.css">
     <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
-    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
 </head>
 
 <body>
@@ -120,6 +119,12 @@
                             ? `<a href="${project.website}" class="btn-download">Try Graph Builder</a>`
                             : '';
 
+                        // Media sources are attached only when a slide is viewed.
+                        const modelPreview = project.caseStudy?.cover || project.images.find(media => !media.type || media.type === 'image')?.url;
+                        const modelPreviewHTML = modelPreview
+                            ? `<img class="model-preview" data-preview-src="${modelPreview}" alt="Preview of ${project.title}" decoding="async">`
+                            : '';
+
                         // --- New Variable for Thumbnails ---
                         let thumbnailsHTML = `<div class="carousel-thumbnails">`;
                         let slideIndex = 0; // Tracks the current index for clicking
@@ -128,8 +133,10 @@
                         let modelHTML = '';
                         if (project.model3d && project.model3d !== "") {
                             modelHTML = `
-                                <div class="p-slide">
-                                    <model-viewer src="${project.model3d}" alt="3D Model of ${project.title}" auto-rotate camera-controls></model-viewer>
+                                <div class="p-slide has-model">
+                                    ${modelPreviewHTML}
+                                    <button type="button" class="load-model-btn">Load interactive 3D model</button>
+                                    <model-viewer data-src="${project.model3d}" alt="3D Model of ${project.title}" camera-controls></model-viewer>
                                     <p class="slide-label">Interactive 3D Render</p>
                                 </div>`;
                             thumbnailsHTML += `<button class="thumbnail active" data-index="${slideIndex}" title="3D Model">🧊</button>`;
@@ -146,7 +153,7 @@
                             if (media.type === 'video') {
                                 mediaHTML += `
                                     <div class="p-slide">
-                                        <video src="${media.url}" autoplay loop muted playsinline controls></video>
+                                        <video data-src="${media.url}" data-poster="${media.poster || modelPreview || ''}" preload="none" playsinline controls></video>
                                         ${captionHTML}
                                     </div>`;
                                 thumbnailsHTML += `<button class="thumbnail ${isActive}" data-index="${slideIndex}" title="${altText}">🎬</button>`;
@@ -154,8 +161,10 @@
                             } else if (media.type === '3d') {
                                 // --- NEW: Handle additional 3D models ---
                                 mediaHTML += `
-                                    <div class="p-slide">
-                                        <model-viewer src="${media.url}" alt="${altText}" auto-rotate camera-controls></model-viewer>
+                                    <div class="p-slide has-model">
+                                        ${modelPreviewHTML}
+                                        <button type="button" class="load-model-btn">Load interactive 3D model</button>
+                                        <model-viewer data-src="${media.url}" alt="${altText}" camera-controls></model-viewer>
                                         ${captionHTML}
                                     </div>`;
                                 thumbnailsHTML += `<button class="thumbnail ${isActive}" data-index="${slideIndex}" title="${altText}">🧊</button>`;
@@ -164,7 +173,7 @@
                                 // --- NEW: Handle PDFs and Google Slides ---
                                 mediaHTML += `
                                     <div class="p-slide">
-                                        <iframe src="${media.url}" class="portfolio-document" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+                                        <iframe data-src="${media.url}" class="portfolio-document" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
                                         ${captionHTML}
                                     </div>`;
                                 thumbnailsHTML += `<button class="thumbnail ${isActive}" data-index="${slideIndex}" title="${altText}">📄</button>`;
@@ -172,11 +181,11 @@
                             } else {
                                 mediaHTML += `
                                     <div class="p-slide">
-                                        <img src="${media.url}" alt="${altText}">
+                                        <img data-src="${media.url}" alt="${altText}" decoding="async">
                                         ${captionHTML}
                                     </div>`;
                                 thumbnailsHTML += `<button class="thumbnail ${isActive}" data-index="${slideIndex}" title="${altText}">
-                                                       <img src="${media.url}" alt="Thumbnail">
+                                                       <img src="${media.url}" alt="Thumbnail" loading="lazy" decoding="async">
                                                    </button>`;
                             }
                             slideIndex++;
@@ -277,6 +286,16 @@
         // --- The Interactive Carousel Logic ---
         function initializeCarousels() {
             const carousels = document.querySelectorAll('.portfolio-carousel-container');
+            let modelViewerRequested = false;
+
+            function requestModelViewer() {
+                if (modelViewerRequested) return;
+                modelViewerRequested = true;
+                const script = document.createElement('script');
+                script.type = 'module';
+                script.src = 'https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js';
+                document.head.appendChild(script);
+            }
 
             carousels.forEach(container => {
                 const track = container.querySelector('.p-carousel-track');
@@ -286,9 +305,63 @@
                 const expandBtn = container.querySelector('.expand-btn');
                 const closeBtn = container.querySelector('.close-btn');
                 let currentIndex = 0;
+                let isNearView = false;
 
                 // Find thumbnails for this specific carousel
                 const thumbnails = container.querySelectorAll('.thumbnail');
+
+                function activateCurrentSlide() {
+                    if (!isNearView && !container.classList.contains('expanded')) return;
+
+                    slides.forEach((slide, index) => {
+                        const video = slide.querySelector('video');
+                        const model = slide.querySelector('model-viewer');
+                        if (index !== currentIndex) {
+                            if (video) video.pause();
+                            if (model) model.removeAttribute('auto-rotate');
+                            return;
+                        }
+
+                        if (model) {
+                            const preview = slide.querySelector('[data-preview-src]');
+                            if (preview) {
+                                preview.src = preview.dataset.previewSrc;
+                                delete preview.dataset.previewSrc;
+                            }
+                            if (slide.classList.contains('model-ready')) model.setAttribute('auto-rotate', '');
+                            return;
+                        }
+                        const media = slide.querySelector('[data-src]');
+                        if (!media) return;
+                        if (media.dataset.poster) {
+                            media.setAttribute('poster', media.dataset.poster);
+                            delete media.dataset.poster;
+                        }
+                        media.setAttribute('src', media.dataset.src);
+                        delete media.dataset.src;
+                    });
+                }
+
+                container.querySelectorAll('.load-model-btn').forEach(button => {
+                    button.addEventListener('click', () => {
+                        const slide = button.closest('.p-slide');
+                        const model = slide.querySelector('model-viewer');
+                        if (!model.dataset.src) return;
+                        button.disabled = true;
+                        button.textContent = 'Loading 3D model…';
+                        model.addEventListener('load', () => {
+                            slide.classList.add('model-ready');
+                            delete model.dataset.src;
+                            activateCurrentSlide();
+                        }, { once: true });
+                        model.addEventListener('error', () => {
+                            button.disabled = false;
+                            button.textContent = 'Retry loading 3D model';
+                        }, { once: true });
+                        requestModelViewer();
+                        model.setAttribute('src', model.dataset.src);
+                    });
+                });
 
                 function updateSlidePosition() {
                     const slideWidth = slides[0].getBoundingClientRect().width;
@@ -299,6 +372,7 @@
                     if (thumbnails[currentIndex]) {
                         thumbnails[currentIndex].classList.add('active');
                     }
+                    activateCurrentSlide();
 
                     // Reset zoom, origin, and panning on all images
                     slides.forEach(slide => {
@@ -341,6 +415,7 @@
 
                 expandBtn.addEventListener('click', () => {
                     container.classList.add('expanded');
+                    activateCurrentSlide();
                     setTimeout(updateSlidePosition, 350); 
                 });
 
@@ -424,6 +499,24 @@
                 });
 
                 window.addEventListener('resize', updateSlidePosition);
+
+                if ('IntersectionObserver' in window) {
+                    const observer = new IntersectionObserver(entries => {
+                        isNearView = entries[0].isIntersecting;
+                        if (isNearView) {
+                            activateCurrentSlide();
+                        } else {
+                            slides.forEach(slide => {
+                                slide.querySelector('video')?.pause();
+                                slide.querySelector('model-viewer')?.removeAttribute('auto-rotate');
+                            });
+                        }
+                    }, { rootMargin: '200px 0px' });
+                    observer.observe(container);
+                } else {
+                    isNearView = true;
+                    activateCurrentSlide();
+                }
             });
         }
 
