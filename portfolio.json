@@ -175,7 +175,7 @@
           "title": "Ansys FEA: Cranial Orthotic Therapy for Positional Plagiocephaly",
           "shortTitle": "FEA: Cranial Orthotic Therapy",
           "company": "BME 112: Finite Element Analysis",
-          "description": "The goal of this project was to develop a computational model to simulate the forces applied to an infant's skull during cranial orthotic (helmet) therapy. By modeling these interactions, we aimed to improve the design of helmet braces specifically for severe cases of positional plagiocephaly (PP), a condition where an infant's head becomes flat or misshapen.We sought to identify the optimal materials and shapes that exert the best pressure on the skull based on a child's specific age and head shape. The model aimed to predict whether the therapy can reduce the Cranial Vault Asymmetry Index (CVAI) below the clinical threshold of 6.25%.",
+          "description": "The goal of this project was to develop a computational model to simulate the forces applied to an infant's skull during cranial orthotic (helmet) therapy. By modeling these interactions, we aimed to improve the design of helmet braces specifically for severe cases of positional plagiocephaly (PP), a condition where an infant's head becomes flat or misshapen. We sought to identify the optimal materials and shapes that exert the best pressure on the skull based on a child's specific age and head shape. The model aimed to predict whether the therapy can reduce the Cranial Vault Asymmetry Index (CVAI) below the clinical threshold of 6.25%.",
           "type": "ansys",
           "images": [
             { "url": "assets/helmet-total-deformation.gif", "caption": "Total Deformation (mm)" },
