@@ -1181,7 +1181,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible {
     display: grid;
     gap: 1rem;
     grid-template-columns: 1.1fr 1fr;
-    grid-template-rows: repeat(3, 190px);
+    grid-template-rows: repeat(3, 220px);
 }
 
 .featured-card {
@@ -1357,11 +1357,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible {
     margin: 1.5rem 0 -0.5rem;
 }
 
-@media (max-width: 820px) {
-    .home-hero {
-        gap: 1.5rem;
-    }
-
+@media (max-width: 1050px) {
     .featured-grid {
         grid-template-columns: 1fr 1fr;
         grid-template-rows: auto;
@@ -1377,6 +1373,12 @@ a:focus-visible, button:focus-visible, summary:focus-visible {
         flex: none;
         height: 200px;
         min-height: 0;
+    }
+}
+
+@media (max-width: 820px) {
+    .home-hero {
+        gap: 1.5rem;
     }
 }
 
