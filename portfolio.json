@@ -151,7 +151,7 @@
           "title": "PROMPTly: Integrated Diagnostic Pad for Premature Rupture of Membranes",
           "shortTitle": "PROMPTly Diagnostic Pad",
           "company": "PROMPTly Senior Design Project",
-          "description": "PROMPTly is a senior design prototype exploring a pad-integrated lateral flow test for Placental Alpha-Microglobulin-1 (PAMG-1), a biomarker used in evaluating premature rupture of membranes (PROM). I led the device design and tested fluid-routing and volume-control mechanisms with synthetic fluid analogs. The concept aims to offer a less intrusive way to identify possible PROM. Clinical accuracy and comparisons with existing tests have not been established by the work shown here.",
+          "description": "PROMPTly is a senior design prototype exploring a pad-integrated lateral flow test for Placental Alpha-Microglobulin-1 (PAMG-1), a biomarker used in evaluating premature rupture of membranes (PROM). I led the device design and tested fluid-routing and volume-control mechanisms with synthetic fluid analogs. The concept aims to offer a less intrusive way to identify possible PROM.",
           "type": "assembly",
           "contactOnly": true,
           "images": [

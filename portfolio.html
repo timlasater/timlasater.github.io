@@ -209,17 +209,12 @@
                         const presentation = project.images.find(media => media.type === 'document');
                         const galleryHTML = presentation ? `
                             <div class="presentation-section">
-                                <div class="presentation-preview">
-                                    <img src="${presentation.poster}" alt="${escapeAttribute(projectTitle)} logo" loading="lazy" decoding="async">
-                                    <div>
-                                        <p class="presentation-kicker">Project presentation</p>
-                                        <h4>${presentation.caption || `${projectTitle} Pitch Deck`}</h4>
-                                        <a href="${escapeAttribute(presentation.url)}" class="btn-download" target="_blank" rel="noopener noreferrer">Open full deck <span aria-hidden="true">↗</span></a>
-                                    </div>
-                                </div>
                                 <div class="presentation-frame">
+                                    <button type="button" class="expand-btn" aria-label="Expand ${escapeAttribute(projectTitle)} pitch deck">Expand ⤢</button>
+                                    <button type="button" class="close-btn" aria-label="Close ${escapeAttribute(projectTitle)} pitch deck">Close ✖</button>
                                     <iframe src="${escapeAttribute(presentation.embedUrl || presentation.url)}" title="${escapeAttribute(projectTitle)} pitch deck" allowfullscreen></iframe>
                                 </div>
+                                <a href="${escapeAttribute(presentation.url)}" class="btn-download presentation-link" target="_blank" rel="noopener noreferrer">Open full deck <span aria-hidden="true">↗</span></a>
                             </div>
                         ` : `
                             <div class="portfolio-carousel-container" role="group" aria-roledescription="carousel" aria-label="${escapeAttribute(projectTitle)} media gallery">
@@ -283,6 +278,7 @@
                 });
 
                 // 3. Initialize the interactive carousels AFTER elements are on the page
+                initializePresentationFrames();
                 initializeCarousels();
 
                 // Project cards arrive after the initial fragment navigation attempt.
@@ -303,6 +299,21 @@
         }
 
         window.addEventListener('hashchange', scrollToLinkedProject);
+
+        function initializePresentationFrames() {
+            document.querySelectorAll('.presentation-frame').forEach(frame => {
+                const expandBtn = frame.querySelector('.expand-btn');
+                const closeBtn = frame.querySelector('.close-btn');
+                expandBtn.addEventListener('click', () => {
+                    frame.classList.add('expanded');
+                    closeBtn.focus();
+                });
+                closeBtn.addEventListener('click', () => {
+                    frame.classList.remove('expanded');
+                    expandBtn.focus();
+                });
+            });
+        }
 
         // --- The Interactive Carousel Logic ---
         function initializeCarousels() {
@@ -552,6 +563,11 @@
 
         // Global Keyboard Controls
         document.addEventListener('keydown', (e) => {
+            const activePresentation = document.querySelector('.presentation-frame.expanded');
+            if (activePresentation && e.key === 'Escape') {
+                activePresentation.querySelector('.close-btn').click();
+                return;
+            }
             const activeContainer = document.querySelector('.portfolio-carousel-container.expanded');
             if (!activeContainer) return;
 
