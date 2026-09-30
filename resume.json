@@ -1,6 +1,7 @@
 {
   "experience": [
     {
+      "id": "scientific-horizons-experience",
       "role": "Research Associate / Device Engineer",
       "company": "Scientific Horizons Consulting",
       "link": "https://www.linkedin.com/company/scientifichorizons/",
@@ -40,6 +41,7 @@
       ]
     },
     {
+      "id": "hui-lab-experience",
       "role": "Undergraduate Researcher",
       "company": "Hui Lab, University of California, Irvine",
       "link": "https://hui.bme.uci.edu/",

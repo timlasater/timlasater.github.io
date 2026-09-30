@@ -65,6 +65,12 @@
     </footer>
     
     <script>
+        const escapeAttribute = value => String(value)
+            .replaceAll('&', '&amp;')
+            .replaceAll('"', '&quot;')
+            .replaceAll('<', '&lt;')
+            .replaceAll('>', '&gt;');
+
         // 1. Fetch the JSON data
         fetch('portfolio.json')
             .then(response => response.json())
@@ -123,10 +129,14 @@
                             ? `<a href="${project.website}" class="btn-download">Try Graph Builder</a>`
                             : '';
 
+                        const projectTitle = project.shortTitle || project.caseStudy?.displayTitle || project.title;
+                        const totalSlides = Number(Boolean(project.model3d)) + project.images.length;
+                        const slideLabel = (description, index) => escapeAttribute(`Show ${projectTitle}, slide ${index + 1} of ${totalSlides}: ${description}`);
+
                         // Media sources are attached only when a slide is viewed.
                         const modelPreview = project.caseStudy?.cover || project.images.find(media => !media.type || media.type === 'image')?.url;
                         const modelPreviewHTML = modelPreview
-                            ? `<img class="model-preview" data-preview-src="${modelPreview}" alt="Preview of ${project.title}" decoding="async">`
+                            ? `<img class="model-preview" data-preview-src="${modelPreview}" alt="Preview of ${escapeAttribute(projectTitle)}" decoding="async">`
                             : '';
 
                         // --- New Variable for Thumbnails ---
@@ -140,10 +150,10 @@
                                 <div class="p-slide has-model">
                                     ${modelPreviewHTML}
                                     <button type="button" class="load-model-btn">Load interactive 3D model</button>
-                                    <model-viewer data-src="${project.model3d}" alt="3D Model of ${project.title}" camera-controls></model-viewer>
+                                    <model-viewer data-src="${project.model3d}" alt="3D model of ${escapeAttribute(projectTitle)}" camera-controls></model-viewer>
                                     <p class="slide-label">Interactive 3D Render</p>
                                 </div>`;
-                            thumbnailsHTML += `<button class="thumbnail active" data-index="${slideIndex}" title="3D Model">🧊</button>`;
+                            thumbnailsHTML += `<button type="button" class="thumbnail active" data-index="${slideIndex}" aria-label="${slideLabel('interactive 3D model', slideIndex)}" aria-pressed="true" title="3D model"><span aria-hidden="true">🧊</span></button>`;
                             slideIndex++;
                         }
 
@@ -151,16 +161,18 @@
                         let mediaHTML = '';
                         project.images.forEach(media => {
                             const captionHTML = media.caption ? `<p class="slide-label">${media.caption}</p>` : '';
-                            const altText = media.caption || 'Portfolio Media';
+                            const description = media.caption || media.alt || (media.type === 'document' ? 'project presentation' : 'project image');
+                            const altText = escapeAttribute(media.alt || `${projectTitle}: ${description}`);
                             const isActive = slideIndex === 0 ? 'active' : ''; // Make first thumb active if there's no primary 3D model
+                            const isPressed = slideIndex === 0 ? 'true' : 'false';
 
                             if (media.type === 'video') {
                                 mediaHTML += `
                                     <div class="p-slide">
-                                        <video data-src="${media.url}" data-poster="${media.poster || modelPreview || ''}" preload="none" playsinline controls></video>
+                                        <video data-src="${media.url}" data-poster="${media.poster || modelPreview || ''}" preload="none" playsinline controls aria-label="${altText}"></video>
                                         ${captionHTML}
                                     </div>`;
-                                thumbnailsHTML += `<button class="thumbnail ${isActive}" data-index="${slideIndex}" title="${altText}">🎬</button>`;
+                                thumbnailsHTML += `<button type="button" class="thumbnail ${isActive}" data-index="${slideIndex}" aria-label="${slideLabel(description, slideIndex)}" aria-pressed="${isPressed}" title="${altText}"><span aria-hidden="true">🎬</span></button>`;
                                 
                             } else if (media.type === '3d') {
                                 // --- NEW: Handle additional 3D models ---
@@ -171,16 +183,16 @@
                                         <model-viewer data-src="${media.url}" alt="${altText}" camera-controls></model-viewer>
                                         ${captionHTML}
                                     </div>`;
-                                thumbnailsHTML += `<button class="thumbnail ${isActive}" data-index="${slideIndex}" title="${altText}">🧊</button>`;
+                                thumbnailsHTML += `<button type="button" class="thumbnail ${isActive}" data-index="${slideIndex}" aria-label="${slideLabel(description, slideIndex)}" aria-pressed="${isPressed}" title="${altText}"><span aria-hidden="true">🧊</span></button>`;
                                 
                             } else if (media.type === 'document') {
                                 // --- NEW: Handle PDFs and Google Slides ---
                                 mediaHTML += `
                                     <div class="p-slide">
-                                        <iframe data-src="${media.url}" class="portfolio-document" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+                                        <iframe data-src="${media.url}" class="portfolio-document" title="${escapeAttribute(projectTitle)} project presentation" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
                                         ${captionHTML}
                                     </div>`;
-                                thumbnailsHTML += `<button class="thumbnail ${isActive}" data-index="${slideIndex}" title="${altText}">📄</button>`;
+                                thumbnailsHTML += `<button type="button" class="thumbnail ${isActive}" data-index="${slideIndex}" aria-label="${slideLabel(description, slideIndex)}" aria-pressed="${isPressed}" title="${altText}"><span aria-hidden="true">📄</span></button>`;
                             
                             } else {
                                 mediaHTML += `
@@ -188,8 +200,8 @@
                                         <img data-src="${media.url}" alt="${altText}" decoding="async">
                                         ${captionHTML}
                                     </div>`;
-                                thumbnailsHTML += `<button class="thumbnail ${isActive}" data-index="${slideIndex}" title="${altText}">
-                                                       <img src="${media.url}" alt="Thumbnail" loading="lazy" decoding="async">
+                                thumbnailsHTML += `<button type="button" class="thumbnail ${isActive}" data-index="${slideIndex}" aria-label="${slideLabel(description, slideIndex)}" aria-pressed="${isPressed}" title="${altText}">
+                                                       <img src="${media.url}" alt="" aria-hidden="true" loading="lazy" decoding="async">
                                                    </button>`;
                             }
                             slideIndex++;
@@ -198,8 +210,7 @@
                         thumbnailsHTML += `</div>`; // Close the thumbnail container
 
                         // --- NEW: Count slides and conditionally hide carousel UI ---
-                        const totalSlides = (project.model3d && project.model3d !== "" ? 1 : 0) + project.images.length;
-                        const navButtonsHTML = totalSlides > 1 ? `<button class="p-prev-btn">&#10094;</button><button class="p-next-btn">&#10095;</button>` : '';
+                        const navButtonsHTML = totalSlides > 1 ? `<button type="button" class="p-prev-btn" aria-label="Previous slide in ${escapeAttribute(projectTitle)} gallery">&#10094;</button><button type="button" class="p-next-btn" aria-label="Next slide in ${escapeAttribute(projectTitle)} gallery">&#10095;</button>` : '';
                         const finalThumbnailsHTML = totalSlides > 1 ? thumbnailsHTML : '';
 
                         // Company tag is optional
@@ -230,9 +241,9 @@
                                 ${companyHTML}
                                 ${projectOverviewHTML}
                                 
-                                <div class="portfolio-carousel-container">
-                                    <button class="expand-btn">Expand ⤢</button>
-                                    <button class="close-btn">Close ✖</button>
+                                <div class="portfolio-carousel-container" role="group" aria-roledescription="carousel" aria-label="${escapeAttribute(projectTitle)} media gallery">
+                                    <button type="button" class="expand-btn" aria-label="Expand ${escapeAttribute(projectTitle)} gallery">Expand ⤢</button>
+                                    <button type="button" class="close-btn" aria-label="Close ${escapeAttribute(projectTitle)} gallery">Close ✖</button>
                                     
                                     ${navButtonsHTML}
                                     
@@ -290,6 +301,7 @@
         // --- The Interactive Carousel Logic ---
         function initializeCarousels() {
             const carousels = document.querySelectorAll('.portfolio-carousel-container');
+            const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
             let modelViewerRequested = false;
 
             function requestModelViewer() {
@@ -332,7 +344,10 @@
                                 preview.src = preview.dataset.previewSrc;
                                 delete preview.dataset.previewSrc;
                             }
-                            if (slide.classList.contains('model-ready')) model.setAttribute('auto-rotate', '');
+                            if (slide.classList.contains('model-ready')) {
+                                if (reducedMotion.matches) model.removeAttribute('auto-rotate');
+                                else model.setAttribute('auto-rotate', '');
+                            }
                             return;
                         }
                         const media = slide.querySelector('[data-src]');
@@ -372,10 +387,11 @@
                     track.style.transform = `translateX(-${slideWidth * currentIndex}px)`;
 
                     // --- NEW: Highlight the active thumbnail ---
-                    thumbnails.forEach(thumb => thumb.classList.remove('active'));
-                    if (thumbnails[currentIndex]) {
-                        thumbnails[currentIndex].classList.add('active');
-                    }
+                    thumbnails.forEach((thumb, index) => {
+                        const active = index === currentIndex;
+                        thumb.classList.toggle('active', active);
+                        thumb.setAttribute('aria-pressed', String(active));
+                    });
                     activateCurrentSlide();
 
                     // Reset zoom, origin, and panning on all images
@@ -420,13 +436,17 @@
                 expandBtn.addEventListener('click', () => {
                     container.classList.add('expanded');
                     activateCurrentSlide();
+                    closeBtn.focus();
                     setTimeout(updateSlidePosition, 350); 
                 });
 
                 closeBtn.addEventListener('click', () => {
                     container.classList.remove('expanded');
+                    expandBtn.focus();
                     setTimeout(updateSlidePosition, 350); 
                 });
+
+                reducedMotion.addEventListener('change', activateCurrentSlide);
 
                 slides.forEach(slide => {
                     const img = slide.querySelector('img');

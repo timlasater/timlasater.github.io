@@ -108,8 +108,8 @@
           "type": "assembly",
           "model3d": "assets/CV_Camera_Fixture.glb",
           "images": [
-            { "url": "assets/camera-diagram.png" },
-            { "url": "assets/camera-setup.png" },
+            { "url": "assets/camera-diagram.png", "alt": "Diagram showing the camera, lens, and tubing positions in the droplet pump fixture" },
+            { "url": "assets/camera-setup.png", "alt": "Camera and tubing fixture assembled on the laboratory droplet pump" },
             { "url": "assets/cameraFixtureSW.png", "caption": "SolidWorks Assembly" },
             { "url": "assets/camera-video.mp4", "caption": "CV Demo", "type":"video", "poster": "assets/camera-setup.png" }
           ],
@@ -220,9 +220,9 @@
             { "url": "assets/duck-boomerang.gif", "caption": "Motion Study" },
             { "url": "assets/duck-flap.mp4", "caption": "The wings can flap!", "type": "video", "poster": "assets/duckSW1.png" },
             { "url": "assets/duck-waddle.mp4", "caption": "The feet can waddle, but it can still sit upright.", "type": "video", "poster": "assets/duck-sitting.jpg" },
-            { "url": "assets/duck-sitting.jpg"},
+            { "url": "assets/duck-sitting.jpg", "alt": "3D printed toy duck sitting upright on its pivoting feet" },
             { "url": "assets/duckSW3.png", "caption": "Transparent view of the internal mechanism" },
-            { "url": "assets/duckSW2.png"}
+            { "url": "assets/duckSW2.png", "alt": "SolidWorks view of the toy duck's internal wing and foot mechanisms" }
           ],
           "downloads": {
             "cad": "assets/downloads/duckSW.zip",
@@ -361,7 +361,7 @@
           "model3d": "assets/scissor-holder.glb",
           "images": [
             { "url": "assets/scissors-holder-sw-1.png", "caption": "SolidWorks CAD" },
-            { "url": "assets/scissors-holder-sw-2.png", "caption": "" },
+            { "url": "assets/scissors-holder-sw-2.png", "alt": "Second SolidWorks view of the upright kitchen scissors holder" },
             { "url": "assets/scissors-holder-irl-1.jpg", "caption": "Physical Print" },
             { "url": "assets/scissors-holder-irl-2.jpg", "caption": "With Scissors" }
           ],

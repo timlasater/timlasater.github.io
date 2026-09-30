@@ -38,6 +38,31 @@
             <a href="/graph-builder/">Graph Builder</a>
    </nav>
 
+    <section id="experience">
+        <h2>Experience & Research</h2>
+        <div class="resume-outcomes" aria-labelledby="outcomes-heading">
+            <h3 id="outcomes-heading">Selected outcomes</h3>
+            <div class="outcome-grid">
+                <a class="resume-outcome" href="#scientific-horizons-experience">
+                    <strong>25+</strong>
+                    <span>nebulizer device iterations</span>
+                    <small>Scientific Horizons Consulting</small>
+                </a>
+                <a class="resume-outcome" href="#hui-lab-experience">
+                    <strong>&gt;33%</strong>
+                    <span>improvement in lab-measured microfluidic mixing</span>
+                    <small>Hui Lab</small>
+                </a>
+                <a class="resume-outcome" href="#hui-lab-experience">
+                    <strong>90%</strong>
+                    <span>shorter microfluidic design-build-test cycle</span>
+                    <small>Hui Lab</small>
+                </a>
+            </div>
+        </div>
+        <div id="experience-container"></div>
+    </section>
+
     <section id="education" class="content-section">
         <h2 class="text-center">Education</h2>
         <div class="card text-center">
@@ -48,11 +73,6 @@
             <p>Specialization in Micro/Nano-scale Engineering</p>
             <p>Summa Cum Laude &nbsp; | &nbsp; Phi Beta Kappa &nbsp; | &nbsp; <strong>GPA: 3.986</strong></p>
         </div>
-    </section>
-
-    <section id="experience">
-        <h2>Experience & Research</h2>
-        <div id="experience-container"></div>
     </section>
 
     <section id="skills">
@@ -142,7 +162,7 @@
 
                     // Build the full card HTML
                     const cardHTML = `
-                        <div class="card padded-card">
+                        <div class="card padded-card"${job.id ? ` id="${job.id}"` : ''}>
                             <div class="resume-header-row">
                                 ${logoHTML}
                                 <div class="resume-title-block">
