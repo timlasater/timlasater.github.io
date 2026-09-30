@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portfolio | Timothy Lasater</title>
-    <meta name="description" content="Portfolio of Timothy Lasater, a Biomedical Engineering student at UC Irvine specializing in Micro/Nano-scale Engineering and Medical Device R&D.">
+    <meta name="description" content="Medical device R&D, microfluidics, simulation, and prototyping projects by Timothy Lasater, a biomedical engineer and UC Irvine graduate.">
     <meta name="author" content="Timothy Lasater">
     <meta name="keywords" content="Timothy Lasater, Biomedical Engineer, UC Irvine, Medical Device R&D, SolidWorks">
     <meta property="og:title" content="Timothy Lasater | Biomedical Engineer">
@@ -19,7 +19,7 @@
 <body>
     <header>
         <h1>Timothy Lasater</h1>
-        <p>Biomedical Engineering @ UC Irvine | Medical Device R&D</p>
+        <p>Biomedical Engineer | Medical Device R&D</p>
         <p class="contact-info">
             <a href="mailto:timothy.a.lasater@gmail.com" target="_blank">timothy.a.lasater@gmail.com</a> | 
             (949) 291-3592 | 
@@ -39,8 +39,18 @@
         <aside class="sidebar" id="toc-container"></aside>
 
         <main class="portfolio-content">
+            <div class="portfolio-intro">
+                <h2>Engineering Portfolio</h2>
+                <p>Explore selected medical device, research, simulation, and hands-on design projects.</p>
+            </div>
+
+            <details class="mobile-toc">
+                <summary>Jump to a project</summary>
+                <div id="mobile-toc-container"></div>
+            </details>
+
             <div class="nda-banner">
-                <p><strong>Confidentiality Note:</strong> Due to active non-disclosure agreements (NDAs) with industry partners, several of my most advanced R&D projects and proprietary CAD models cannot be displayed publicly. The following represents a curated selection of cleared professional work, academic projects, and personal engineering endeavors.</p>
+                <p><strong>Confidentiality Note:</strong> Some industry R&D projects and CAD models are protected by non-disclosure agreements. The work shown here is cleared for public sharing.</p>
             </div>
             
             <div id="projects-container"></div>
@@ -57,6 +67,7 @@
             .then(response => response.json())
             .then(data => {
                 const tocContainer = document.getElementById('toc-container');
+                const mobileTocContainer = document.getElementById('mobile-toc-container');
                 const projectsContainer = document.getElementById('projects-container');
                 
                 let tocHTML = '';
@@ -213,19 +224,34 @@
 
                 // 2. Inject HTML into the page
                 tocContainer.innerHTML = tocHTML;
+                mobileTocContainer.innerHTML = tocHTML;
                 projectsContainer.innerHTML = projectsHTML;
+
+                mobileTocContainer.addEventListener('click', event => {
+                    if (event.target.closest('a')) document.querySelector('.mobile-toc').open = false;
+                });
 
                 // 3. Initialize the interactive carousels AFTER elements are on the page
                 initializeCarousels();
 
-                // Project cards are added after the page loads, so direct links need a second scroll.
-                const linkedProject = document.getElementById(location.hash.slice(1));
-                if (linkedProject) linkedProject.scrollIntoView();
+                // Project cards arrive after the initial fragment navigation attempt.
+                requestAnimationFrame(() => requestAnimationFrame(scrollToLinkedProject));
+                if (document.readyState !== 'complete') {
+                    window.addEventListener('load', scrollToLinkedProject, { once: true });
+                }
             })
             .catch(error => {
                 console.error("Error loading portfolio data:", error);
                 document.getElementById('projects-container').innerHTML = "<p>Error loading portfolio data.</p>";
             });
+
+        function scrollToLinkedProject() {
+            if (!location.hash) return;
+            const target = document.getElementById(decodeURIComponent(location.hash.slice(1)));
+            if (target) target.scrollIntoView();
+        }
+
+        window.addEventListener('hashchange', scrollToLinkedProject);
 
         // --- The Interactive Carousel Logic ---
         function initializeCarousels() {

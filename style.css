@@ -319,8 +319,17 @@ footer {
     min-width: 0; /* Prevents grid overflow */
 }
 
+.portfolio-intro h2 {
+    margin-top: 0;
+}
+
+.mobile-toc {
+    display: none;
+}
+
 .section-title {
     margin-top: 0;
+    scroll-margin-top: 5rem;
 }
 
 .portfolio-card {
@@ -433,8 +442,25 @@ model-viewer {
         grid-template-columns: 1fr;
     }
     .sidebar {
-        position: relative;
-        top: 0;
+        display: none;
+    }
+    .mobile-toc {
+        display: block;
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        margin-bottom: 1.5rem;
+        padding: 1rem 1.25rem;
+    }
+    .mobile-toc summary {
+        color: var(--accent-color);
+        cursor: pointer;
+        font-weight: 700;
+    }
+    #mobile-toc-container {
+        max-height: 50vh;
+        overflow-y: auto;
+        padding-top: 0.5rem;
     }
 }
 
