@@ -27,7 +27,7 @@
             "coverAlt": "Physical nasal sinus model assembled for benchtop testing",
             "summary": "A modular, CT-derived model for measuring where nebulized drug deposits in individual sinuses.",
             "challenge": "Compare aerosol delivery to target regions using a model that can be sampled after each test.",
-            "contribution": "Built a clear-resin nasal model with magnetically removable sinus pieces.",
+            "contribution": "Built & validated a clear-resin nasal model with magnetically removable sinus pieces.",
             "testing": "After exposure, each sinus piece is washed and the recovered drug is measured with HPLC.",
             "result": "Used in benchtop comparisons of nebulizer designs against commercial devices."
           },
@@ -72,9 +72,9 @@
             "coverAlt": "CAD model of the dissolution and permeation testing cell",
             "summary": "A custom cell that evaluates salivary dissolution and trans-buccal permeation in one assay.",
             "challenge": "Study both drug release and membrane transport in a more faithful model of the oral environment.",
-            "contribution": "Designed the upper cell, membrane spacer, temperature-controlled lower chamber, and sampling port.",
+            "contribution": "Designed the upper cell, temperature-controlled lower chamber, and sampling port.",
             "testing": "Samples taken at set timepoints are analyzed by HPLC to measure permeation over time.",
-            "result": "The apparatus supports simultaneous dissolution and permeation testing with controlled temperature."
+            "result": "The apparatus was used in formulation development for simultaneous dissolution and permeation testing with controlled temperature."
           },
           "description": "Designed a custom testing apparatus for a novel drug delivery characterization assay. A modification of the standard Franz cell for permeation assays, this cell allows for the simultaneous evaluation of salivary dissolution and trans-buccal permeation of a target drug in a more faithful simulation of the oral environment. The drug to be tested, in the form of a pouch, is placed in the upper cell (white), suspended by a grid over an artificial or ex-vivo porcine buccal membrane (transparent), with the O-ring (orange) acting as a spacer. The lower cell (grey) contains an inner and outer chamber, printed in transparent resin to allow the operator to see into both chambers. A water bath is circulated through the outer chamber from an external heat source to maintain the system at physiological temperature, entering and exiting through the short ports on the sides. The inner chamber is filled with buffer solution, in contact with the membrane. At time t=0, the upper cell is also filled with buffer solution, and the drug begins to dissolve into solution and permeate across the membrane into the lower cell, simulating the entry of drug into the bloodstream. At predefined timepoints, samples are taken through the long, angled sample port, which allows a small volume to removed without lowering the liquid level away from the membrane. Samples are then analyzed with high-performance liquid chromatography (HPLC) to determine the rate of permeation over time. ",
           "type": "assembly",
@@ -96,7 +96,7 @@
           "company": "Hui Lab",
           "caseStudy": {
             "displayTitle": "Computer Vision Camera Fixture",
-            "cover": "assets/camera-setup.png",
+            "cover": "assets/cameraFixtureSW.png",
             "coverAlt": "Camera and tubing fixture in the droplet pump setup",
             "summary": "A fixture that keeps the camera, lens, and tubing aligned for computer vision tracking of droplets.",
             "challenge": "Capture each passing droplet at a consistent scale and focus for automated dispensing.",
@@ -125,7 +125,7 @@
           "company": "Hui Lab",
           "caseStudy": {
             "displayTitle": "Microfluidic Flow Simulation",
-            "cover": "assets/microvortex-screenshot.png",
+            "cover": "assets/microvortex-screenshot-4_3.png",
             "coverAlt": "Simulation of microvortices in a microfluidic channel",
             "summary": "Iterative channel design and simulation improved measured mixing performance by over 33%.",
             "challenge": "Improve mixing inside a microfluidic channel while keeping the design practical to fabricate.",
