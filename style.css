@@ -1107,12 +1107,30 @@ model-viewer {
     box-sizing: border-box;
     display: flex;
     gap: 1.5rem;
-    max-width: 620px;
     padding: 1.5rem;
     width: 100%;
 }
 
-.p-slide .presentation-preview img {
+.presentation-section {
+    margin: 1.5rem 0;
+}
+
+.presentation-frame {
+    aspect-ratio: 16 / 9;
+    background: var(--bg-color);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    margin-top: 1rem;
+    overflow: hidden;
+}
+
+.presentation-frame iframe {
+    border: 0;
+    height: 100%;
+    width: 100%;
+}
+
+.presentation-preview img {
     flex: none;
     height: 96px;
     width: 96px;
@@ -1120,11 +1138,7 @@ model-viewer {
 
 .presentation-preview h4 {
     font-size: 1.2rem;
-    margin: 0.25rem 0;
-}
-
-.presentation-preview p {
-    margin: 0 0 0.8rem;
+    margin: 0.25rem 0 0.75rem;
 }
 
 .presentation-preview .presentation-kicker {
@@ -1142,7 +1156,7 @@ model-viewer {
         padding: 1rem;
     }
 
-    .p-slide .presentation-preview img {
+    .presentation-preview img {
         height: 64px;
         width: 64px;
     }

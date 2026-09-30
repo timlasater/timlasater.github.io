@@ -186,19 +186,7 @@
                                 thumbnailsHTML += `<button type="button" class="thumbnail ${isActive}" data-index="${slideIndex}" aria-label="${slideLabel(description, slideIndex)}" aria-pressed="${isPressed}" title="${altText}"><span aria-hidden="true">🧊</span></button>`;
                                 
                             } else if (media.type === 'document') {
-                                mediaHTML += `
-                                    <div class="p-slide">
-                                        <div class="presentation-preview">
-                                            <img src="${media.poster}" alt="${escapeAttribute(projectTitle)} logo" loading="lazy" decoding="async">
-                                            <div>
-                                                <p class="presentation-kicker">Project presentation</p>
-                                                <h4>${media.caption || `${projectTitle} Pitch Deck`}</h4>
-                                                <p>Explore the complete pitch deck in Google Slides.</p>
-                                                <a href="${escapeAttribute(media.url)}" class="btn-download" target="_blank" rel="noopener noreferrer">Open pitch deck <span aria-hidden="true">↗</span></a>
-                                            </div>
-                                        </div>
-                                    </div>`;
-                                thumbnailsHTML += `<button type="button" class="thumbnail ${isActive}" data-index="${slideIndex}" aria-label="${slideLabel(description, slideIndex)}" aria-pressed="${isPressed}" title="${altText}"><span aria-hidden="true">📄</span></button>`;
+                                // Presentations get a full-width embed and a direct link below.
                             
                             } else {
                                 mediaHTML += `
@@ -218,6 +206,30 @@
                         // --- NEW: Count slides and conditionally hide carousel UI ---
                         const navButtonsHTML = totalSlides > 1 ? `<button type="button" class="p-prev-btn" aria-label="Previous slide in ${escapeAttribute(projectTitle)} gallery">&#10094;</button><button type="button" class="p-next-btn" aria-label="Next slide in ${escapeAttribute(projectTitle)} gallery">&#10095;</button>` : '';
                         const finalThumbnailsHTML = totalSlides > 1 ? thumbnailsHTML : '';
+                        const presentation = project.images.find(media => media.type === 'document');
+                        const galleryHTML = presentation ? `
+                            <div class="presentation-section">
+                                <div class="presentation-preview">
+                                    <img src="${presentation.poster}" alt="${escapeAttribute(projectTitle)} logo" loading="lazy" decoding="async">
+                                    <div>
+                                        <p class="presentation-kicker">Project presentation</p>
+                                        <h4>${presentation.caption || `${projectTitle} Pitch Deck`}</h4>
+                                        <a href="${escapeAttribute(presentation.url)}" class="btn-download" target="_blank" rel="noopener noreferrer">Open full deck <span aria-hidden="true">↗</span></a>
+                                    </div>
+                                </div>
+                                <div class="presentation-frame">
+                                    <iframe src="${escapeAttribute(presentation.embedUrl || presentation.url)}" title="${escapeAttribute(projectTitle)} pitch deck" allowfullscreen></iframe>
+                                </div>
+                            </div>
+                        ` : `
+                            <div class="portfolio-carousel-container" role="group" aria-roledescription="carousel" aria-label="${escapeAttribute(projectTitle)} media gallery">
+                                <button type="button" class="expand-btn" aria-label="Expand ${escapeAttribute(projectTitle)} gallery">Expand ⤢</button>
+                                <button type="button" class="close-btn" aria-label="Close ${escapeAttribute(projectTitle)} gallery">Close ✖</button>
+                                ${navButtonsHTML}
+                                <div class="p-carousel-track">${modelHTML}${mediaHTML}</div>
+                                ${finalThumbnailsHTML}
+                            </div>
+                        `;
 
                         // Company tag is optional
                         const companyHTML = project.company ? `<p class="company-tag">${project.company}</p>` : '';
@@ -247,19 +259,7 @@
                                 ${companyHTML}
                                 ${projectOverviewHTML}
                                 
-                                <div class="portfolio-carousel-container" role="group" aria-roledescription="carousel" aria-label="${escapeAttribute(projectTitle)} media gallery">
-                                    <button type="button" class="expand-btn" aria-label="Expand ${escapeAttribute(projectTitle)} gallery">Expand ⤢</button>
-                                    <button type="button" class="close-btn" aria-label="Close ${escapeAttribute(projectTitle)} gallery">Close ✖</button>
-                                    
-                                    ${navButtonsHTML}
-                                    
-                                    <div class="p-carousel-track">
-                                        ${modelHTML}
-                                        ${mediaHTML}
-                                    </div>
-                                    
-                                    ${finalThumbnailsHTML}
-                                </div>
+                                ${galleryHTML}
 
                                 <div class="download-links">
                                     ${websiteHTML}

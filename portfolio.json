@@ -157,6 +157,7 @@
           "images": [
             { 
               "url": "https://docs.google.com/presentation/d/e/2PACX-1vTxbXxUx1c5RQCcVYONz5D9T-tCWw9idbZEygFaLoPM9FYTDomZ6NXUHyXm6ID34JbCPtvJV5ebXUxs/pub",
+              "embedUrl": "https://docs.google.com/presentation/d/e/2PACX-1vTxbXxUx1c5RQCcVYONz5D9T-tCWw9idbZEygFaLoPM9FYTDomZ6NXUHyXm6ID34JbCPtvJV5ebXUxs/pubembed?start=false&loop=false&delayms=3000",
               "caption": "PROMPTly Pitch Deck",
               "poster": "assets/promptly_logo.jpg",
               "type": "document"
