@@ -186,11 +186,17 @@
                                 thumbnailsHTML += `<button type="button" class="thumbnail ${isActive}" data-index="${slideIndex}" aria-label="${slideLabel(description, slideIndex)}" aria-pressed="${isPressed}" title="${altText}"><span aria-hidden="true">🧊</span></button>`;
                                 
                             } else if (media.type === 'document') {
-                                // --- NEW: Handle PDFs and Google Slides ---
                                 mediaHTML += `
                                     <div class="p-slide">
-                                        <iframe data-src="${media.url}" class="portfolio-document" title="${escapeAttribute(projectTitle)} project presentation" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
-                                        ${captionHTML}
+                                        <div class="presentation-preview">
+                                            <img src="${media.poster}" alt="${escapeAttribute(projectTitle)} logo" loading="lazy" decoding="async">
+                                            <div>
+                                                <p class="presentation-kicker">Project presentation</p>
+                                                <h4>${media.caption || `${projectTitle} Pitch Deck`}</h4>
+                                                <p>Explore the complete pitch deck in Google Slides.</p>
+                                                <a href="${escapeAttribute(media.url)}" class="btn-download" target="_blank" rel="noopener noreferrer">Open pitch deck <span aria-hidden="true">↗</span></a>
+                                            </div>
+                                        </div>
                                     </div>`;
                                 thumbnailsHTML += `<button type="button" class="thumbnail ${isActive}" data-index="${slideIndex}" aria-label="${slideLabel(description, slideIndex)}" aria-pressed="${isPressed}" title="${altText}"><span aria-hidden="true">📄</span></button>`;
                             
